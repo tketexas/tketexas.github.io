@@ -1,16 +1,11 @@
 <!doctype html>
-            <html lang="en">
-              <head>
-                <meta charset="utf-8">
-                <title>Rush</title>
-                <meta name="generator" content="GrapesJS Studio">
-                <meta name="viewport" content="width=device-width,initial-scale=1">
-                <meta property="og:type" content="website">
-                <meta name="robots" content="index,follow">
-                <link rel="stylesheet" href="./css/style.css">
-              <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" sizes="512x512">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/icon.png"> <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rush</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         .container {
             background: #fff;
@@ -69,91 +64,91 @@
             color: #d9534f;
             margin-top: 15px;
         }
-    </style></head>
+    </style>
+</head>
 <body>
 <div class="container">
-  <h1>TKE Rush Interest Form
-  </h1>
-  <form id="myForm" onsubmit="return handleSubmit()">
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required>
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required>
-    <label for="email">Email Address:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="phoneNumber">Phone Number:</label>
-    <input type="text" id="phoneNumber" name="phoneNumber">
-    <label for="instagramHandle">Instagram Handle:</label>
-    <input type="text" id="instagramHandle" name="instagramHandle">
-    <div class="g-recaptcha" data-sitekey="6LdmqCQqAAAAAIzDOic3lLIudDocHvhHaRSFQstq">
-    </div>
-    <button type="submit">Submit</button>
-    <div id="message" class="message">
-    </div>
-  </form>
+    <h1>TKE Rush Interest Form</h1>
+    <form id="myForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber">
+        <label for="instagramHandle">Instagram Handle:</label>
+        <input type="text" id="instagramHandle" name="instagramHandle">
+        <div class="g-recaptcha" data-sitekey="6LdmqCQqAAAAAIzDOic3lLIudDocHvhHaRSFQstq"></div>
+        <button type="submit">Submit</button>
+        <div id="message" class="message"></div>
+    </form>
 </div>
 <script>
-  function handleSubmit() {
-    // Prevent the default form submission
-    event.preventDefault();
-    // Execute reCAPTCHA
-    grecaptcha.execute();
-    return false;
-    // Prevent the form from submitting until reCAPTCHA is validated
-  }
-  function onSubmit(e) {
-    e.preventDefault();
-    // Prevent default form submission
-    // Get the reCAPTCHA response token
-    var recaptchaResponse = grecaptcha.getResponse();
-    // If reCAPTCHA is not completed, show an error message
-    if (!recaptchaResponse) {
-      var messageElement = document.getElementById('message');
-      messageElement.style.color = '#d9534f';
-      messageElement.textContent = 'Please complete the reCAPTCHA';
-      return;
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Execute reCAPTCHA
+        grecaptcha.execute();
+    });
+
+    function onSubmit(e) {
+        // Prevent default form submission
+        e.preventDefault();
+        
+        // Get the reCAPTCHA response token
+        var recaptchaResponse = grecaptcha.getResponse();
+
+        // If reCAPTCHA is not completed, show an error message
+        if (!recaptchaResponse) {
+            var messageElement = document.getElementById('message');
+            messageElement.style.color = '#d9534f';
+            messageElement.textContent = 'Please complete the reCAPTCHA';
+            return;
+        }
+
+        // Create a FormData object
+        var formData = new FormData(document.getElementById('myForm'));
+
+        // Append the reCAPTCHA response token to the form data
+        formData.append('g-recaptcha-response', recaptchaResponse);
+
+        // Perform the form submission
+        fetch('https://script.google.com/macros/s/AKfycbxfofMSUxWLHlbK0IB67EVr2TD2hsVR3NGUAbr0pngK8rPMGZOvkEMsFvHZk2hIGNiI0g/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text()) // Use text() if server returns plain text
+        .then(data => {
+            var messageElement = document.getElementById('message');
+            if (data.includes('reCAPTCHA verification passed and data saved')) {
+                messageElement.style.color = '#5bc0de';
+                messageElement.textContent = 'Form submitted successfully!';
+            } else {
+                messageElement.style.color = '#d9534f';
+                messageElement.textContent = 'Error: ' + data;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            var messageElement = document.getElementById('message');
+            messageElement.style.color = '#d9534f';
+            messageElement.textContent = 'Error during submission';
+        });
     }
-    // Create a FormData object
-    var formData = new FormData(document.getElementById('myForm'));
-    // Append the reCAPTCHA response token to the form data
-    formData.append('g-recaptcha-response', recaptchaResponse);
-    // Perform the form submission
-    fetch('https://script.google.com/macros/s/AKfycbxfofMSUxWLHlbK0IB67EVr2TD2hsVR3NGUAbr0pngK8rPMGZOvkEMsFvHZk2hIGNiI0g/exec', {
-      method: 'POST',
-      body: formData
+
+    // Use reCAPTCHA callback to handle the form submission
+    function onRecaptchaSuccess() {
+        onSubmit(event);
     }
-         )
-      .then(response => response.text()) // Use text() if server returns plain text
-      .then(data => {
-      var messageElement = document.getElementById('message');
-      if (data.includes('reCAPTCHA verification passed and data saved')) {
-        messageElement.style.color = '#5bc0de';
-        messageElement.textContent = 'Form submitted successfully!';
-      }
-      else {
-        messageElement.style.color = '#d9534f';
-        messageElement.textContent = 'Error: ' + data;
-      }
+
+    // Use reCAPTCHA callback to handle the form submission
+    function handleRecaptchaCallback() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute();
+        });
     }
-           )
-      .catch(error => {
-      console.error('Error:', error);
-      var messageElement = document.getElementById('message');
-      messageElement.style.color = '#d9534f';
-      messageElement.textContent = 'Error during submission';
-    }
-            );
-  }
-  // Attach the onSubmit function to reCAPTCHA callback
-  function onRecaptchaSuccess() {
-    onSubmit(event);
-  }
-  // Use reCAPTCHA callback to handle the form submission
-  function handleRecaptchaCallback() {
-    grecaptcha.ready(function() {
-      grecaptcha.execute();
-    }
-                    );
-  }
 </script>
 </body>
+</html>
