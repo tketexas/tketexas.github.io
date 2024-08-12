@@ -3,17 +3,74 @@
 <head>
     <meta charset="utf-8">
     <title>Rush</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
-        /* Your CSS styles here */
+        /* Basic CSS styles for your form */
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+        .g-recaptcha {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            text-align: center;
+            color: #d9534f;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Test 3</h1>
-    <form id="myForm">
+    <h1>Test 4</h1>
+    <form id="myForm" onsubmit="handleSubmit(event)">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" required>
         <label for="lastName">Last Name:</label>
@@ -29,15 +86,15 @@
         <div id="message" class="message"></div>
     </form>
 </div>
-<script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-        // Execute reCAPTCHA
-        grecaptcha.execute();
-    });
 
-    function onRecaptchaSuccess() {
+<script>
+    function handleSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get the reCAPTCHA response token
         var recaptchaResponse = grecaptcha.getResponse();
+
+        // If reCAPTCHA is not completed, show an error message
         if (!recaptchaResponse) {
             var messageElement = document.getElementById('message');
             messageElement.style.color = '#d9534f';
@@ -45,9 +102,12 @@
             return;
         }
 
+        // Create a FormData object
         var formData = new FormData(document.getElementById('myForm'));
+        // Append the reCAPTCHA response token to the form data
         formData.append('g-recaptcha-response', recaptchaResponse);
 
+        // Perform the form submission
         fetch('https://script.google.com/macros/s/AKfycbxfofMSUxWLHlbK0IB67EVr2TD2hsVR3NGUAbr0pngK8rPMGZOvkEMsFvHZk2hIGNiI0g/exec', {
             method: 'POST',
             body: formData
@@ -69,17 +129,6 @@
             messageElement.style.color = '#d9534f';
             messageElement.textContent = 'Error during submission';
         });
-    }
-
-    function handleRecaptchaCallback() {
-        grecaptcha.ready(function() {
-            grecaptcha.execute();
-        });
-    }
-
-    function onSubmit(e) {
-        e.preventDefault(); // Prevent default form submission
-        onRecaptchaSuccess();
     }
 </script>
 </body>
