@@ -11,75 +11,100 @@
               <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" sizes="512x512">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icon.png"> <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <style>
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            box-sizing: border-box;
-        }
-        h1 {
-            margin-top: 0;
-            color: #333;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 8px;
-            color: #555;
-        }
-        input {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        input:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
-        }
-        .g-recaptcha {
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-        }
-        button {
-            padding: 10px;
-            background-color: #919194;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #AD2624;
-        }
-        .message {
-            text-align: center;
-            color: #d9534f;
-            margin-top: 15px;
-        }
-    </style></head>
-              <body id="ik5q4k"><section id="ixfsuk" class="gjs-section"><div id="i1c87i" class="gjs-container"><div title="" id="i757r8">Tau Kappa Epsilon | Gamma-Upsilon Chapter | [YearsSince] Years of Excellence in Austin, Texas</div></div></section><section id="iy5a3z" class="gjs-section"><div id="i1ce8a" class="gjs-container"><a href="https://tketexas.com/" id="ivfg38" class="gjs-link-box"><div id="ijjfek">ABOUT<br/></div></a><a href="https://tketexas.com/rush" id="iy007p" class="gjs-link-box"><div id="i1da2f">RUSH</div></a><a href="https://tketexas.com/history" id="ixxucg" class="gjs-link-box"><div id="icugpz">HISTORY</div></a><a href="https://tketexas.com/" id="i6idrl" class="gjs-link-box"><img src="assets/tkelogo_1024x855.png" id="itvnax"/></a><a href="https://tketexas.com/alumni" id="i4vpct" class="gjs-link-box"><div id="i89hk2">ALUMNI</div></a><a href="https://tketexas.com/donate" id="imm5bp" class="gjs-link-box"><div id="is85ij">DONATE</div></a><a href="https://tketexas.com/contact" id="ipg0a1" class="gjs-link-box"><div id="i3tbze">CONTACT</div></a></div></section><section class="gjs-section" id="iykyfl"><div class="gjs-container" id="ikxv1o"><div id="i9kalx">BROTHERHOOD</div><div id="ir8ezj">PHILANTHROPY</div><div id="i4gm3j">SCHOLARSHIP</div><div id="ifwuao">LEADERSHIP</div><div id="iwdqkv">CHARACTER</div><div id="i5onci">SERVICE</div></div></section><div id="i204wt" class="gjs-grid-row"><div id="i8rhvu" class="gjs-grid-column"><div id="io6wve" class="gjs-grid-row"><div id="ifx4ox" class="gjs-grid-column"><div id="ilz8th">Are You Interested in Becoming Part of Something More?
+<style>
+	* {
+   	 box-sizing: border-box;
+	}
+    .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        box-sizing: border-box;
+        margin: auto; /* Center container */
+    }
+    h1 {
+        margin-top: 0;
+        color: #333;
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    .required-notice {
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #666;
+    }
+    .asterisk {
+        color: #666; /* Color for asterisk */
+        margin-bottom: 1em;
+    }
+    label {
+	margin-bottom: 0.5em;
+	font-weight: 600;
+        color: #333;
+        display: block;
+    }
+    input {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+    .g-recaptcha {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        display: inline-block;
+	padding: 0.75em 1.5em;
+    	background-color: #919194;
+    	color: #ffffff;
+	border: none;
+    	border-radius: 4px;
+    	cursor: pointer;
+    	font-size: 16px;
+    	transition: background-color 0.3s ease;
+        width: auto; /* Adjust width to content */
+        max-width: 100%; /* Ensure it doesn't overflow container */
+        align-self: center; /* Center align button within form */
+    }
+    button:hover {
+        background-color: #AD2624;
+    }
+    .message {
+        text-align: center;
+        color: #d9534f;
+        margin-top: 15px;
+    }
+</style></head>
+              <body id="ik5q4k"><section id="ixfsuk" class="gjs-section"><div id="i1c87i" class="gjs-container"><div title="" id="i757r8">Tau Kappa Epsilon | Gamma-Upsilon Chapter | [YearsSince] Years of Excellence in Austin, Texas</div></div></section><section id="iy5a3z" class="gjs-section"><div id="i1ce8a" class="gjs-container"><a href="https://tketexas.com/" id="ivfg38" class="gjs-link-box"><div id="ijjfek">ABOUT<br/></div></a><a href="https://tketexas.com/rush" id="iy007p" class="gjs-link-box"><div id="i1da2f">RUSH</div></a><a href="https://tketexas.com/history" id="ixxucg" class="gjs-link-box"><div id="icugpz">HISTORY</div></a><a href="https://tketexas.com/" id="i6idrl" class="gjs-link-box"><img src="assets/tkelogo_1024x855.png" id="itvnax"/></a><a href="https://tketexas.com/alumni" id="i4vpct" class="gjs-link-box"><div id="i89hk2">ALUMNI</div></a><a href="https://tketexas.com/donate" id="imm5bp" class="gjs-link-box"><div id="is85ij">DONATE</div></a><a href="https://tketexas.com/contact" id="ipg0a1" class="gjs-link-box"><div id="i3tbze">CONTACT</div></a></div></section><section id="iykyfl" class="gjs-section"><div id="ikxv1o" class="gjs-container"><div id="i9kalx">BROTHERHOOD</div><div id="ir8ezj">PHILANTHROPY</div><div id="i4gm3j">SCHOLARSHIP</div><div id="ifwuao">LEADERSHIP</div><div id="iwdqkv">CHARACTER</div><div id="i5onci">SERVICE</div></div></section><div id="i204wt" class="gjs-grid-row"><div id="i8rhvu" class="gjs-grid-column"><div id="io6wve" class="gjs-grid-row"><div id="ifx4ox" class="gjs-grid-column"><div id="ilz8th">Are You Interested in Becoming Part of Something More?
 Contact our Rush Chair Brady Parker or Fill out the Form Bellow:</div></div></div></div></div><div id="ivj4ur" class="gjs-custom-code"><div id="ib3z7l"><div id="iehp3g">
-  </div></div></div><div id="i6vb55" class="gjs-grid-row"><div id="i0xeal" class="gjs-grid-column"><div id="iqj90y" class="gjs-image-box"></div><div id="ik2cwb">Brady K. Parker<br/></div><div id="ieycsj">Rush Chair</div><a id="i3k75l" title="(210) 309 - 9434" href="tel:12103099434" class="gjs-link">(210) 309 - 9434</a><a title="Brady's Instagram" href="https://www.instagram.com/bradyparker12/" id="izsax5" target="_blank" class="gjs-link">@BradyParker12</a><a title="Email Us" href="mailto:Rush@TKETexas.com?subject=Information on TKE Rush" target="_blank" id="iot5y2" class="gjs-link">Rush@TKETexas.com</a></div><div id="iia8zy" class="gjs-grid-column"><div id="iyvi7p" class="gjs-custom-code"><div> 
-<h1>TKE Rush Interest Form</h1>
+  </div></div></div><div id="i6vb55" class="gjs-grid-row"><div id="i0xeal" class="gjs-grid-column"><div id="iqj90y" class="gjs-image-box"></div><div id="ik2cwb">Brady K. Parker<br/></div><div id="ieycsj">Rush Chair</div><a id="i3k75l" title="(210) 309 - 9434" href="tel:12103099434" class="gjs-link">(210) 309 - 9434</a><a title="Brady's Instagram" href="https://www.instagram.com/bradyparker12/" id="izsax5" target="_blank" class="gjs-link">@BradyParker12</a><a title="Email Us" href="mailto:Rush@TKETexas.com?subject=Information on TKE Rush" target="_blank" id="iot5y2" class="gjs-link">Rush@TKETexas.com</a></div><div id="iia8zy" class="gjs-grid-column"><div id="iyvi7p" class="gjs-custom-code"><div class="container"> 
     <form id="myForm" onsubmit="handleSubmit(event)">
-        <label for="firstName">First Name:</label>
+        <h1>TKE Rush Interest Form</h1>
+        <img src="assets/bm4bw.png" alt="TKE - Better Men for a Better World" class="form-image">
+        <div class="required-notice">
+            <span class="asterisk">*</span> indicates required
+        </div>
+        <label for="firstName">First Name <span class="asterisk">*</span>:</label>
         <input type="text" id="firstName" name="firstName" required>
-        <label for="lastName">Last Name:</label>
+        <label for="lastName">Last Name <span class="asterisk">*</span>:</label>
         <input type="text" id="lastName" name="lastName" required>
-        <label for="email">Email Address:</label>
+        <label for="email">Email Address <span class="asterisk">*</span>:</label>
         <input type="email" id="email" name="email" required>
         <label for="phoneNumber">Phone Number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber">
