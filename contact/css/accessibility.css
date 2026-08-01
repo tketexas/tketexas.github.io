@@ -1,0 +1,100 @@
+/* ============================================================
+   TKE Texas — Accessibility utilities
+   Loaded on every page alongside style.css and cookie-consent.css
+   ============================================================ */
+
+/* Visually hide content while keeping it available to screen readers,
+   e.g. page <h1> elements that duplicate the visible banner text. */
+.tke-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to main content" link: hidden off-screen until it receives
+   keyboard focus, then becomes visible at the top-left of the page. */
+.tke-skip-link {
+  position: absolute;
+  top: -60px;
+  left: 8px;
+  z-index: 1000001;
+  background: #AD2624;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 0 0 6px 6px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.tke-skip-link:focus {
+  top: 0;
+  outline: 3px solid #2463EB;
+  outline-offset: 2px;
+}
+
+/* Generic, visible keyboard-focus indicator used as a safety net for any
+   interactive element that doesn't already define its own focus style. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #2463EB;
+  outline-offset: 2px;
+}
+
+/* Small legal/utility links added to the footer of every page
+   (Privacy Policy link + Cookie Settings trigger). The copyright bar
+   they live in is a flex row; flex-wrap plus a full-width basis here
+   pushes this block onto its own line below it. Apply the
+   .tke-footer-copyright class to that container div (each page's
+   copyright div has a different auto-generated id, so a class is
+   the reliable hook here rather than an id selector). */
+.tke-footer-copyright {
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+
+.tke-footer-legal {
+  display: block;
+  flex-basis: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: 6px;
+  font-family: "Mulish", sans-serif;
+  font-size: 12.8px;
+}
+
+.tke-footer-legal a,
+.tke-footer-legal button.tke-footer-link-btn {
+  font-family: "Mulish", sans-serif;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.tke-footer-legal a:hover,
+.tke-footer-legal a:focus-visible,
+.tke-footer-legal button.tke-footer-link-btn:hover,
+.tke-footer-legal button.tke-footer-link-btn:focus-visible {
+  color: #2463EB;
+}
+
+.tke-footer-legal button.tke-footer-link-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 12.8px;
+  cursor: pointer;
+}
+
+.tke-footer-legal .tke-footer-sep {
+  padding: 0 6px;
+  color: #ffffff;
+}
