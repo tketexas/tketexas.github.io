@@ -38,7 +38,6 @@
   top: 0;
   outline: 3px solid #AD2624;
   outline-offset: 2px;
-  text-decoration: underline;
 }
 
 /* Generic, visible keyboard-focus indicator used as a safety net for any
@@ -49,7 +48,6 @@ input:focus-visible,
 [tabindex]:focus-visible {
   outline: 3px solid #AD2624;
   outline-offset: 2px;
-  text-decoration: underline;
 }
 
 /* Small legal/utility links added to the footer of every page
@@ -84,6 +82,7 @@ input:focus-visible,
 .tke-footer-legal a:focus-visible,
 .tke-footer-legal button.tke-footer-link-btn:hover,
 .tke-footer-legal button.tke-footer-link-btn:focus-visible {
+  text-decoration: underline;
   color: #AD2624;
 }
 
@@ -97,5 +96,5 @@ input:focus-visible,
 
 .tke-footer-legal .tke-footer-sep {
   padding: 0 6px;
-  color: #ffffff;
+  color: #AD2624;
 }
