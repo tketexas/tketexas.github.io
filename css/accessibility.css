@@ -36,8 +36,9 @@
 
 .tke-skip-link:focus {
   top: 0;
-  outline: 3px solid #2463EB;
+  outline: 3px solid #AD2624;
   outline-offset: 2px;
+  text-decoration: underline;
 }
 
 /* Generic, visible keyboard-focus indicator used as a safety net for any
@@ -46,8 +47,9 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #2463EB;
+  outline: 3px solid #AD2624;
   outline-offset: 2px;
+  text-decoration: underline;
 }
 
 /* Small legal/utility links added to the footer of every page
@@ -69,28 +71,27 @@ input:focus-visible,
   text-align: center;
   margin-top: 6px;
   font-family: "Mulish", sans-serif;
-  font-size: 12.8px;
+  font-size: 16.32px;
 }
 
 .tke-footer-legal a,
 .tke-footer-legal button.tke-footer-link-btn {
   font-family: "Mulish", sans-serif;
   color: #ffffff;
-  text-decoration: underline;
 }
 
 .tke-footer-legal a:hover,
 .tke-footer-legal a:focus-visible,
 .tke-footer-legal button.tke-footer-link-btn:hover,
 .tke-footer-legal button.tke-footer-link-btn:focus-visible {
-  color: #2463EB;
+  color: #AD2624;
 }
 
 .tke-footer-legal button.tke-footer-link-btn {
   background: transparent;
   border: none;
   padding: 0;
-  font-size: 12.8px;
+  font-size: 16.32px;
   cursor: pointer;
 }
 
