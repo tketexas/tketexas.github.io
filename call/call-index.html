@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Connecting call…</title>
+  <style>
+    body {
+      font-family: "Mulish", sans-serif;
+      color: #475569;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .tke-call-box {
+      max-width: 360px;
+    }
+    .tke-call-box p {
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+    }
+    .tke-call-link {
+      display: inline-block;
+      background-color: #AD2624;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.7em 1.4em;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .tke-call-link:hover,
+    .tke-call-link:focus-visible {
+      filter: brightness(0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="tke-call-box">
+    <p>Connecting your call…</p>
+    <!-- Fallback for anyone who lands here without JS running, or whose
+         browser/OS doesn't auto-follow the tel: redirect below. -->
+    <a id="tke-call-fallback" class="tke-call-link" href="/">Click here to call</a>
+  </div>
+
+  <script>
+    (function () {
+      // Expects a URL like /call/?n=15125550182 - just the raw digits,
+      // no "+", no punctuation. Building the tel: link this way (rather
+      // than accepting a pre-formatted number) avoids any URL-encoding
+      // edge cases with "+" in query strings. Kept as a small pure
+      // function (no DOM/navigation) so it's directly testable.
+      function getTelLink(search) {
+        var params = new URLSearchParams(search);
+        var digits = (params.get('n') || '').replace(/\D/g, '');
+        return digits ? ('tel:+' + digits) : null;
+      }
+
+      var telLink = getTelLink(window.location.search);
+
+      if (!telLink) {
+        document.querySelector('.tke-call-box p').textContent = 'No phone number was provided.';
+        document.getElementById('tke-call-fallback').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('tke-call-fallback').href = telLink;
+
+      // Attempt the automatic redirect. If the browser/OS has no tel:
+      // handler, nothing visibly happens and the fallback link above
+      // stays available as a manual option.
+      window.location.replace(telLink);
+    })();
+  </script>
+</body>
+</html>
