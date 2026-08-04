@@ -2,22 +2,55 @@
    TKE Texas — Live officer info from Google Sheets
    Fetches a small JSON payload from the Apps Script Web App and
    swaps in the name / phone / Instagram / photo on the Contact
-   and Rush pages. Safe to include on every page: each block below
-   checks the relevant element actually exists before touching it,
-   so it's a no-op on pages that don't have that content.
+   and Rush pages.
+
+   LOADING NOTE: this file is meant to be included WITHOUT the
+   `defer` attribute, placed early in <head> (see setup notes) -
+   that lets the fetch() below fire immediately as the browser
+   reaches this tag, in parallel with the rest of the page loading,
+   instead of waiting for the whole page to finish parsing first.
+   The actual DOM writes are still safely postponed until the page
+   is ready, via the ready() helper below.
    ============================================================ */
 (function () {
   // TODO: paste the /exec URL you get after deploying the Apps Script
   // Web App (see AppsScript-Code.gs setup notes).
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyU_LSSlpFxQhI90hNRw0hQTRZLEnFiLlSB8x2yfydctOdU6j7yZSSZfyI3nNzITQ/exec';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzqXQTGOJDFK9j7Ml99iaERJItOQDH4V95LEZ9SUp3wMpS62_UI6ws4vNe74nEh3SlU/exec';
+
+  // Start the request the instant this script executes - don't wait on
+  // anything else. This is the main lever for making the very first,
+  // uncached load feel faster: the browser can be off fetching this
+  // JSON (and then the image behind it) while it's still downloading
+  // fonts, other CSS, etc.
+  var dataPromise = fetch(ENDPOINT, { cache: 'no-store' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('Sheet content request failed: ' + res.status);
+      return res.json();
+    })
+    .catch(function (err) {
+      // Fail quietly - the page keeps whatever static text/image was
+      // already in the HTML, so a Sheets outage never breaks the page.
+      console.error('Sheet content fetch failed:', err);
+      return null;
+    });
+
+  function ready(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  function setName(el, name) {
+    if (!el || !name) return;
+    el.textContent = name;
+  }
 
   function applyContact(data) {
     if (!data) return;
 
-    var name = document.getElementById('ised9w');
-    if (name && data.name) {
-      name.textContent = data.name;
-    }
+    setName(document.getElementById('ised9w'), data.name);
 
     var phoneLink = document.getElementById('iudsit');
     if (phoneLink) {
@@ -48,6 +81,11 @@
       name.appendChild(document.createElement('br'));
     }
 
+    // Same officer name, repeated inline in the hero paragraph
+    // ("Contact our Rush Chair, <name here>, or Fill out the Form
+    // Bellow:") - see the HTML snippet that wraps this in its own span.
+    setName(document.getElementById('irushofficername'), data.name);
+
     var phoneLink = document.getElementById('i3k75l');
     if (phoneLink) {
       if (data.phone) {
@@ -75,24 +113,14 @@
     }
   }
 
-  // Only bother fetching if this page actually has one of the target
-  // elements - avoids a pointless network request on every other page.
-  var isContactPage = !!document.getElementById('ised9w');
-  var isRushPage = !!document.getElementById('ik2cwb');
-  if (!isContactPage && !isRushPage) return;
-
-  fetch(ENDPOINT)
-    .then(function (res) {
-      if (!res.ok) throw new Error('Sheet content request failed: ' + res.status);
-      return res.json();
-    })
-    .then(function (data) {
-      if (isContactPage) applyContact(data.contact);
-      if (isRushPage) applyRush(data.rush);
-    })
-    .catch(function (err) {
-      // Fail quietly - the page keeps whatever static text/image was
-      // already in the HTML, so a Sheets outage never breaks the page.
-      console.error('Sheet content fetch failed:', err);
+  ready(function () {
+    dataPromise.then(function (data) {
+      if (!data) return;
+      // Each apply function checks for its own elements, so calling
+      // both here is a harmless no-op on whichever page doesn't have
+      // that content.
+      applyContact(data.contact);
+      applyRush(data.rush);
     });
+  });
 })();
