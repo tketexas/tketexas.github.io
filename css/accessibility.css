@@ -100,63 +100,49 @@ input:focus-visible,
   color: #ffffff;
 }
 
-/* Footer social icons (Instagram/LinkedIn): precise brand-maroon color
-   on hover/focus via a CSS mask overlay, applied to every page's icon
-   link. The source PNGs are pure black-plus-alpha silhouettes (no true
-   white pixels), so a plain color filter can't reliably retarget them
-   to an exact hex from black - masking a colored overlay on top is
-   exact, needs no new image assets, and doesn't touch the existing
-   <img alt="..."> tags underneath (keeps their accessible names intact).
-   10px inset matches .gjs-link-box's own padding so the overlay lines
-   up with the icon exactly rather than covering the extra padding too. */
+/* Footer social icons (Instagram/LinkedIn): brand-maroon color on
+   hover/focus, achieved by crossfading to real maroon versions of the
+   icons - an exact color match, and simpler/more reliable cross-browser
+   than a CSS mask overlay (which needs the overlay's size to exactly
+   match the underlying icon; a plain image swap can't drift out of
+   alignment the way that did). Add a second image as a sibling of the
+   existing icon <img> inside each social link - see setup notes below
+   for the exact markup to add per page.
+
+   SETUP: for each of the 12 icon links across the site, change:
+     <a ... class="gjs-link-box"><img src="assets/instagram1.png" id="..."/></a>
+   to:
+     <a ... class="gjs-link-box"><img src="assets/instagram1.png" id="..."/><img src="assets/instagram1Maroon.png" class="tke-social-icon-hover" alt=""/></a>
+   (swap in linkedin.png / linkedinMaroon.png for the LinkedIn icons).
+   Also add instagram1Maroon.png and linkedinMaroon.png into every
+   page's own assets/ folder alongside the existing icon PNGs. */
 #ig2mzm, #iaeq0j, #iw95ak, #innf6y, #i34q0i, #it0cvk,
 #ixheik, #ihemmp, #i8koha, #iciedv, #ic4rmf, #i98att {
   position: relative;
-  aspect-ratio: 1 / 1;
 }
 
-#ig2mzm::after, #iaeq0j::after, #iw95ak::after,
-#innf6y::after, #i34q0i::after, #it0cvk::after,
-#ixheik::after, #ihemmp::after, #i8koha::after,
-#iciedv::after, #ic4rmf::after, #i98att::after {
-  content: "";
+.tke-social-icon-hover {
   position: absolute;
-  inset: 10px;
-  background-color: #ad2624;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transition: opacity 0.15s ease;
   pointer-events: none;
 }
 
-#ig2mzm::after, #iaeq0j::after, #iw95ak::after,
-#innf6y::after, #i34q0i::after, #it0cvk::after {
-  -webkit-mask-image: url('../assets/instagram1.png');
-  mask-image: url('../assets/instagram1.png');
-}
-
-#ixheik::after, #ihemmp::after, #i8koha::after,
-#iciedv::after, #ic4rmf::after, #i98att::after {
-  -webkit-mask-image: url('../assets/linkedin.png');
-  mask-image: url('../assets/linkedin.png');
-}
-
-#ig2mzm:hover::after, #ig2mzm:focus-visible::after,
-#iaeq0j:hover::after, #iaeq0j:focus-visible::after,
-#iw95ak:hover::after, #iw95ak:focus-visible::after,
-#innf6y:hover::after, #innf6y:focus-visible::after,
-#i34q0i:hover::after, #i34q0i:focus-visible::after,
-#it0cvk:hover::after, #it0cvk:focus-visible::after,
-#ixheik:hover::after, #ixheik:focus-visible::after,
-#ihemmp:hover::after, #ihemmp:focus-visible::after,
-#i8koha:hover::after, #i8koha:focus-visible::after,
-#iciedv:hover::after, #iciedv:focus-visible::after,
-#ic4rmf:hover::after, #ic4rmf:focus-visible::after,
-#i98att:hover::after, #i98att:focus-visible::after {
+#ig2mzm:hover .tke-social-icon-hover, #ig2mzm:focus-visible .tke-social-icon-hover,
+#iaeq0j:hover .tke-social-icon-hover, #iaeq0j:focus-visible .tke-social-icon-hover,
+#iw95ak:hover .tke-social-icon-hover, #iw95ak:focus-visible .tke-social-icon-hover,
+#innf6y:hover .tke-social-icon-hover, #innf6y:focus-visible .tke-social-icon-hover,
+#i34q0i:hover .tke-social-icon-hover, #i34q0i:focus-visible .tke-social-icon-hover,
+#it0cvk:hover .tke-social-icon-hover, #it0cvk:focus-visible .tke-social-icon-hover,
+#ixheik:hover .tke-social-icon-hover, #ixheik:focus-visible .tke-social-icon-hover,
+#ihemmp:hover .tke-social-icon-hover, #ihemmp:focus-visible .tke-social-icon-hover,
+#i8koha:hover .tke-social-icon-hover, #i8koha:focus-visible .tke-social-icon-hover,
+#iciedv:hover .tke-social-icon-hover, #iciedv:focus-visible .tke-social-icon-hover,
+#ic4rmf:hover .tke-social-icon-hover, #ic4rmf:focus-visible .tke-social-icon-hover,
+#i98att:hover .tke-social-icon-hover, #i98att:focus-visible .tke-social-icon-hover {
   opacity: 1;
 }
