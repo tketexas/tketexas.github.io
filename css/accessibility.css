@@ -36,7 +36,7 @@
 
 .tke-skip-link:focus {
   top: 0;
-  outline: 3px solid #AD2624;
+  outline: 3px solid #ad2624;
   outline-offset: 2px;
 }
 
@@ -46,7 +46,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #AD2624;
+  outline: 3px solid #ad2624;
   outline-offset: 2px;
 }
 
@@ -69,29 +69,28 @@ input:focus-visible,
   text-align: center;
   margin-top: 6px;
   font-family: "Mulish", sans-serif;
-  font-size: 16.32px;
+  font-size: 12.8px;
 }
 
 .tke-footer-legal a,
 .tke-footer-legal button.tke-footer-link-btn {
   font-family: "Mulish", sans-serif;
-  color: #AD2624;
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .tke-footer-legal a:hover,
 .tke-footer-legal a:focus-visible,
 .tke-footer-legal button.tke-footer-link-btn:hover,
 .tke-footer-legal button.tke-footer-link-btn:focus-visible {
-  color: #AD2624;
-  text-decoration: underline;
+  color: #2463EB;
 }
 
 .tke-footer-legal button.tke-footer-link-btn {
   background: transparent;
   border: none;
   padding: 0;
-  font-size: 16.32px;
+  font-size: 12.8px;
   cursor: pointer;
 }
 
