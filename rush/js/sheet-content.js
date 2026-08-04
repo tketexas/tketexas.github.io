@@ -81,10 +81,11 @@
       name.appendChild(document.createElement('br'));
     }
 
-    // Same officer name, repeated inline in the hero paragraph
-    // ("Contact our Rush Chair, <name here>, or Fill out the Form
-    // Bellow:") - see the HTML snippet that wraps this in its own span.
-    setName(document.getElementById('irushofficername'), data.name);
+    // Independent name field for the hero paragraph ("Contact our Rush
+    // Chair, <name here>, or Fill out the Form Bellow:") - intentionally
+    // separate from the officer card's name above, sourced from its own
+    // sheet cell (Rush!J4) rather than reusing Rush!C4.
+    setName(document.getElementById('irushofficername'), data.heroName);
 
     var phoneLink = document.getElementById('i3k75l');
     if (phoneLink) {
