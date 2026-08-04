@@ -276,33 +276,40 @@
    * ---------------------------------------------------------------- */
 
   function initRecaptchaGate() {
-    var container = document.querySelector('.g-recaptcha');
-    if (!container) return;
+    var form = document.getElementById('myForm');
+    if (!form) return;
+    var submitBtn = form.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
 
     var consent = readConsent();
     if (consent && consent.functional) {
       loadRecaptchaScript();
       var existingGate = document.getElementById('tke-cc-recaptcha-gate');
       if (existingGate) existingGate.parentNode.removeChild(existingGate);
-      container.style.display = '';
+      submitBtn.disabled = false;
       return;
     }
 
     if (document.getElementById('tke-cc-recaptcha-gate')) return;
 
-    container.style.display = 'none';
+    // The recaptcha widget here IS the submit button itself (invisible
+    // mode binds directly to it via the g-recaptcha class + data
+    // attributes) - so gate it by disabling the button and explaining why,
+    // rather than hiding a separate checkbox element the way v2 Checkbox
+    // mode would.
+    submitBtn.disabled = true;
     var gate = document.createElement('div');
     gate.id = 'tke-cc-recaptcha-gate';
     gate.className = 'tke-cc-recaptcha-gate';
     gate.innerHTML =
-      '<p>This form uses Google reCAPTCHA to help block spam. Loading it requires enabling <strong>functional</strong> cookies.</p>' +
-      '<button type="button" class="tke-cc-btn tke-cc-btn-solid" id="tke-cc-recaptcha-enable">Enable &amp; load reCAPTCHA</button>';
-    container.parentNode.insertBefore(gate, container);
+      '<p>This form uses Google reCAPTCHA to help block spam. Enabling it requires <strong>functional</strong> cookies.</p>' +
+      '<button type="button" class="tke-cc-btn tke-cc-btn-solid" id="tke-cc-recaptcha-enable">Enable spam protection</button>';
+    submitBtn.parentNode.insertBefore(gate, submitBtn);
 
     document.getElementById('tke-cc-recaptcha-enable').addEventListener('click', function () {
       writeConsent(true, 'recaptcha-gate');
       gate.parentNode.removeChild(gate);
-      container.style.display = '';
+      submitBtn.disabled = false;
       loadRecaptchaScript();
       hideBanner();
       closeModal();
@@ -313,6 +320,11 @@
     if (document.getElementById('tke-recaptcha-script')) return;
     var s = document.createElement('script');
     s.id = 'tke-recaptcha-script';
+    // v2 (Checkbox or Invisible) just needs the plain API script - once it
+    // loads, it automatically scans the page for any .g-recaptcha element
+    // (our submit button, for Invisible mode) and binds itself to it,
+    // regardless of whether that element existed before or after this
+    // script tag was added.
     s.src = 'https://www.google.com/recaptcha/api.js';
     s.async = true;
     s.defer = true;
