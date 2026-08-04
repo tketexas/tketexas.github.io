@@ -69,7 +69,7 @@ input:focus-visible,
   text-align: center;
   margin-top: 6px;
   font-family: "Mulish", sans-serif;
-  font-size: 12.8px;
+  font-size: 16.32px;
 }
 
 .tke-footer-legal a,
@@ -91,7 +91,7 @@ input:focus-visible,
   background: transparent;
   border: none;
   padding: 0;
-  font-size: 12.8px;
+  font-size: 16.32px;
   cursor: pointer;
 }
 
