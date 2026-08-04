@@ -15,7 +15,7 @@
 (function () {
   // TODO: paste the /exec URL you get after deploying the Apps Script
   // Web App (see AppsScript-Code.gs setup notes).
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzqXQTGOJDFK9j7Ml99iaERJItOQDH4V95LEZ9SUp3wMpS62_UI6ws4vNe74nEh3SlU/exec';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGfurcdj2zHqoUkbKqJUK6Q8GEEfWVKnbIiWdYDTHszalBrJTXfpzXPyOPoMxyKUkI/exec';
 
   // Start the request the instant this script executes - don't wait on
   // anything else. This is the main lever for making the very first,
