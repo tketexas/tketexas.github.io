@@ -112,7 +112,7 @@
 .tke-cc-btn:focus-visible,
 .tke-cc-close:focus-visible,
 .tke-cc-toggle:focus-visible {
-  outline: 3px solid #2463EB;
+  outline: 3px solid #ad2624;
   outline-offset: 2px;
 }
 
@@ -306,6 +306,14 @@
   .tke-cc-banner-inner {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .tke-cc-banner-text {
+    /* Reset the desktop flex-basis: 420px was a WIDTH hint for the row
+       layout, but once flex-direction becomes column it's read as a
+       HEIGHT hint instead, forcing ~420px of vertical space before the
+       buttons even if the text only needs a fraction of that. */
+    flex: 0 1 auto;
   }
 
   .tke-cc-banner-actions .tke-cc-btn {
