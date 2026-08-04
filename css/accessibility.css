@@ -75,15 +75,16 @@ input:focus-visible,
 .tke-footer-legal a,
 .tke-footer-legal button.tke-footer-link-btn {
   font-family: "Mulish", sans-serif;
-  color: #ffffff;
-  text-decoration: underline;
+  color: #ad2624;
+  text-decoration: none;
 }
 
 .tke-footer-legal a:hover,
 .tke-footer-legal a:focus-visible,
 .tke-footer-legal button.tke-footer-link-btn:hover,
 .tke-footer-legal button.tke-footer-link-btn:focus-visible {
-  color: #2463EB;
+  color: #ad2624;
+  text-decoration: underline;
 }
 
 .tke-footer-legal button.tke-footer-link-btn {
