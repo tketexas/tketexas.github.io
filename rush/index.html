@@ -114,15 +114,15 @@
             <span class="asterisk">*</span> indicates required
         </div>
         <label for="firstName">First Name <span class="asterisk">*</span>:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
         <label for="lastName">Last Name <span class="asterisk">*</span>:</label>
-        <input type="text" id="lastName" name="lastName" required>
+        <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
         <label for="email">Email Address <span class="asterisk">*</span>:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" autocomplete="email" required>
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber">
+        <input type="text" id="phoneNumber" name="phoneNumber" autocomplete="tel">
         <label for="instagramHandle">Instagram Handle:</label>
-        <input type="text" id="instagramHandle" name="instagramHandle">
+        <input type="text" id="instagramHandle" name="instagramHandle" autocomplete="off">
         <div class="g-recaptcha" data-sitekey="6LdmqCQqAAAAAIzDOic3lLIudDocHvhHaRSFQstq"></div>
         <button type="submit">Submit</button>
         <div id="message" class="message" role="status" aria-live="polite" aria-atomic="true"></div>
