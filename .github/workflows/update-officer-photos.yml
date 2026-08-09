@@ -1,0 +1,42 @@
+name: Update officer photos
+
+# Runs hourly, plus can be triggered manually from the Actions tab for
+# testing (Actions -> Update officer photos -> Run workflow).
+"on":
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch: {}
+
+# Needed so this workflow's automatic GITHUB_TOKEN is allowed to push a
+# commit back to the repo - if this step ever fails with a permissions
+# error, also check Settings -> Actions -> General -> Workflow
+# permissions and make sure "Read and write permissions" is selected.
+permissions:
+  contents: write
+
+jobs:
+  update-photos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download current officer photos
+        run: node .github/workflows/update-officer-photos.js
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes - photos are already current."
+          else
+            git add contact/assets/prytanis.jpg rush/assets/rushchair.png
+            git commit -m "Update officer photos from Google Sheet [automated]"
+            git push
+          fi
