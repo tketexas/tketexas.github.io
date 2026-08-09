@@ -14,7 +14,7 @@ const path = require('path');
 
 // Same public endpoint sheet-content.js already calls - no credentials
 // needed, this is read-only public data.
-const ENDPOINT = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID_HERE/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGfurcdj2zHqoUkbKqJUK6Q8GEEfWVKnbIiWdYDTHszalBrJTXfpzXPyOPoMxyKUkI/exec';
 
 // Reject anything smaller than this as probably a broken/error response
 // rather than a real photo - guards against a transient failure
