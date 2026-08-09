@@ -1,0 +1,45 @@
+name: Update officer info
+
+# Runs hourly, plus can be triggered manually from the Actions tab for
+# testing (Actions -> Update officer info -> Run workflow).
+"on":
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch: {}
+
+# Needed so this workflow's automatic GITHUB_TOKEN is allowed to push a
+# commit back to the repo - if this step ever fails with a permissions
+# error, also check Settings -> Actions -> General -> Workflow
+# permissions and make sure "Read and write permissions" is selected.
+permissions:
+  contents: write
+
+jobs:
+  update-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install jsdom
+        run: npm install jsdom --no-save
+
+      - name: Update officer info in the static pages
+        run: node .github/workflows/update-officer-info.js
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes - officer info is already current."
+          else
+            git add contact/index.html rush/index.html
+            git commit -m "Update officer info from Google Sheet [automated]"
+            git push
+          fi
