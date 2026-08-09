@@ -77,6 +77,20 @@
         display: flex;
 		justify-content: center;
 	}
+    /* Google requires visible text disclosure in the user flow if the
+       floating reCAPTCHA badge is hidden - see the .recaptcha-disclosure
+       rule and the paragraph added near the submit button below. The
+       badge itself uses Google's own inline styles, which only an
+       !important rule can reliably override. */
+    .grecaptcha-badge {
+        visibility: hidden !important;
+    }
+    .recaptcha-disclosure {
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        margin: 0 0 10px 0;
+    }
     button {
         display: inline-block;
 	padding: 0.75em 1.5em;
@@ -123,6 +137,7 @@
         <input type="text" id="phoneNumber" name="phoneNumber" autocomplete="tel" inputmode="numeric" pattern="[0-9]{10}" title="Enter a 10-digit phone number">
         <label for="instagramHandle">Instagram Handle</label>
         <input type="text" id="instagramHandle" name="instagramHandle" autocomplete="off">
+        <p class="recaptcha-disclosure">This site is protected by reCAPTCHA.</p>
         <button type="submit" class="g-recaptcha" data-sitekey="6LeynXQtAAAAADgIpWeOQMUPujWrl9VH9HCCIWBZ" data-callback="onRecaptchaVerified" data-size="invisible">Submit</button>
         <div id="message" class="message" role="status" aria-live="polite" aria-atomic="true"></div>
     </form>
