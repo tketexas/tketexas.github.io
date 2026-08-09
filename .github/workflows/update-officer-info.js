@@ -21,7 +21,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const ENDPOINT = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID_HERE/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGfurcdj2zHqoUkbKqJUK6Q8GEEfWVKnbIiWdYDTHszalBrJTXfpzXPyOPoMxyKUkI/exec';
 
 const PAGES = [
   { name: 'contact', filePath: path.join(__dirname, '..', '..', 'contact', 'index.html'), apply: applyContact },
