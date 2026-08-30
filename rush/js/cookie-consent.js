@@ -27,7 +27,6 @@
 
   var STORAGE_KEY = 'tketexas_cookie_consent';
   var CONSENT_VERSION = 1; // bump this if the categories/policy change materially
-  var PRIVACY_URL = '/privacy/';
 
   /* ----------------------------------------------------------------
    * Storage helpers
@@ -83,7 +82,7 @@
         '<div class="tke-cc-banner-inner">' +
           '<div class="tke-cc-banner-text">' +
             '<p class="tke-cc-banner-title">We value your privacy</p>' +
-            '<p>This site uses necessary cookies/local storage to operate. With your permission, we\'d also like to use optional <strong>functional</strong> cookies (Google reCAPTCHA) to protect our Rush interest form from spam. See our <a class="tke-cc-link" href="' + PRIVACY_URL + '">Privacy &amp; Cookie Policy</a> for details.</p>' +
+            '<p>This site uses necessary cookies/local storage to operate. With your permission, we\'d also like to use optional <strong>functional</strong> cookies (Google reCAPTCHA) to protect our Rush interest form from spam.</p>' +
           '</div>' +
           '<div class="tke-cc-banner-actions">' +
             '<button type="button" class="tke-cc-btn tke-cc-btn-outline" data-tke-action="reject">Reject All</button>' +
@@ -101,7 +100,7 @@
             '<button type="button" class="tke-cc-close" id="tke-cc-modal-close" aria-label="Close cookie preferences">&times;</button>' +
           '</div>' +
           '<div class="tke-cc-modal-body">' +
-            '<p class="tke-cc-modal-intro">Choose which optional cookies this site can use. Full details in our <a class="tke-cc-link" href="' + PRIVACY_URL + '">Privacy &amp; Cookie Policy</a>.</p>' +
+            '<p class="tke-cc-modal-intro">Choose which optional cookies this site can use.</p>' +
 
             '<div class="tke-cc-category">' +
               '<div class="tke-cc-category-head">' +
