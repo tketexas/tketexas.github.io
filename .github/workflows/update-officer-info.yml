@@ -7,17 +7,34 @@ name: Update officer info
     - cron: '5 * * * *'
   workflow_dispatch: {}
 
-# Needed so this workflow's automatic GITHUB_TOKEN is allowed to push a
+# contents: write lets this workflow's automatic GITHUB_TOKEN push a
 # commit back to the repo - if this step ever fails with a permissions
 # error, also check Settings -> Actions -> General -> Workflow
 # permissions and make sure "Read and write permissions" is selected.
+# actions: write lets the keepalive step below re-enable the workflows.
 permissions:
   contents: write
+  actions: write
 
 jobs:
   update-info:
     runs-on: ubuntu-latest
     steps:
+      # Keepalive: GitHub automatically disables scheduled workflows in a
+      # public repo after 60 days with no repository activity, and these
+      # only commit when officer info actually changes. Re-enabling both
+      # workflows through GitHub's own API on every run resets that clock,
+      # so they never get switched off during quiet stretches - no dummy
+      # commits needed. Each workflow keeps BOTH alive, so either one is
+      # enough. Runs first, and can never block the real update below.
+      - name: Keep scheduled workflows enabled
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X PUT "repos/${{ github.repository }}/actions/workflows/update-officer-info.yml/enable"
+          gh api -X PUT "repos/${{ github.repository }}/actions/workflows/update-officer-photos.yml/enable"
+
       - name: Check out repository
         uses: actions/checkout@v4
 
